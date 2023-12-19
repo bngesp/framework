@@ -180,38 +180,38 @@ class Router
      */
     public function route(array $definition): void
     {
-        if (!isset($definition['path'])) {
+        if (!isset($definition[Constants::DEFINITION_PATH])) {
             throw new RouterException('The undefined path');
         }
 
-        if (!isset($definition['method'])) {
+        if (!isset($definition[Constants::DEFINITION_METHOD])) {
             throw new RouterException('Unspecified method');
         }
 
-        if (!isset($definition['handler'])) {
+        if (!isset($definition[Constants::HANDLER])) {
             throw new RouterException('Undefined controller');
         }
 
-        $method = $definition['method'];
+        $method = $definition[Constants::DEFINITION_METHOD];
 
-        $path = $definition['path'];
+        $path = $definition[Constants::DEFINITION_PATH];
 
-        $where = $definition['where'] ?? [];
+        $where = $definition[Constants::DEFINITION_WHERE] ?? [];
 
-        $cb = (array) $definition['handler'];
+        $cb = (array) $definition[Constants::HANDLER];
 
-        if (isset($cb['middleware'])) {
-            unset($cb['middleware']);
+        if (isset($cb[Constants::MIDDLEWARE])) {
+            unset($cb[Constants::MIDDLEWARE]);
         }
 
-        if (isset($cb['controller'])) {
-            unset($cb['controller']);
+        if (isset($cb[Constants::CONTROLLER])) {
+            unset($cb[Constants::CONTROLLER]);
         }
 
         $route = $this->pushHttpVerb($method, $path, $cb);
 
-        if (isset($definition['middleware'])) {
-            $route->middleware($definition['middleware']);
+        if (isset($definition[Constants::MIDDLEWARE])) {
+            $route->middleware($definition[Constants::MIDDLEWARE]);
         }
 
         $route->where($where);
