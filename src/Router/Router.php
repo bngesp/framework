@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Bow\Router;
 
+use Bow\Http\HttpVerbs;
 use Bow\Router\Exception\RouterException;
 
 class Router
@@ -258,12 +259,12 @@ class Router
     public function post(string $path, callable|string|array $cb): Route
     {
         if (!$this->magic_method) {
-            return $this->routeLoader('POST', $path, $cb);
+            return $this->routeLoader(HttpVerbs::GET->name, $path, $cb);
         }
 
         $method = strtoupper($this->magic_method);
 
-        if (in_array($method, ['DELETE', 'PUT'])) {
+        if (in_array($method, [HttpVerbs::DELETE->name, HttpVerbs::PUT->name])) {
             $this->special_method = $method;
         }
 
@@ -279,7 +280,7 @@ class Router
      */
     public function delete(string $path, callable|string|array $cb): Route
     {
-        return $this->pushHttpVerb('DELETE', $path, $cb);
+        return $this->pushHttpVerb(HttpVerbs::DELETE->name, $path, $cb);
     }
 
     /**
@@ -291,7 +292,7 @@ class Router
      */
     public function put(string $path, callable|string|array $cb): Route
     {
-        return $this->pushHttpVerb('PUT', $path, $cb);
+        return $this->pushHttpVerb(HttpVerbs::PUT->name, $path, $cb);
     }
 
     /**
@@ -303,7 +304,7 @@ class Router
      */
     public function patch(string $path, callable|string|array $cb): Route
     {
-        return $this->pushHttpVerb('PATCH', $path, $cb);
+        return $this->pushHttpVerb(HttpVerbs::PUT->name, $path, $cb);
     }
 
     /**
@@ -315,7 +316,7 @@ class Router
      */
     public function options(string $path, callable|string|array $cb): Route
     {
-        return $this->pushHttpVerb('OPTIONS', $path, $cb);
+        return $this->pushHttpVerb(HttpVerbs::OPTIONS->name, $path, $cb);
     }
 
     /**
@@ -398,7 +399,7 @@ class Router
 
         if (
             $this->auto_csrf === true
-            && in_array($method, ['POST', 'DELETE', 'PUT'])
+            && in_array($method, [HttpVerbs::POST->name, HttpVerbs::DELETE->name, HttpVerbs::PUT->name])
         ) {
             $route->middleware('csrf');
         }
