@@ -18,7 +18,8 @@ class Route
     private mixed $cb;
 
     /**
-     * The road on the road set by the user
+     * The road
+     * on the road set by the user
      *
      * @var string
      */
@@ -117,18 +118,12 @@ class Route
 
         if (!is_array($this->cb)) {
             $this->cb = [
-                'controller' => $this->cb,
-                'middleware' => $middleware
+               Constants::CONTROLLER => $this->cb,
+               Constants::MIDDLEWARE => $middleware
             ];
-
             return $this;
         }
-
-        if (!isset($this->cb['middleware'])) {
-            $this->cb['middleware'] = $middleware;
-        } else {
-            $this->cb['middleware'] = array_merge((array) $this->cb['middleware'], $middleware);
-        }
+        $this->cb[Constants::MIDDLEWARE] = !isset($this->cb[Constants::MIDDLEWARE]) ? $middleware : array_merge((array) $this->cb[Constants::MIDDLEWARE], $middleware);
 
         return $this;
     }
