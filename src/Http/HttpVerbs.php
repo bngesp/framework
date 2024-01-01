@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Bow\Http;
 
-enum HttpVerbs 
+enum HttpVerbs : string
 {
-    case GET;
-    case POST;
-    case PUT;
-    case PATCH;
-    case DELETE;
-    case OPTIONS;
-    case HEAD;
-    case CONNECT;
-    case TRACE;
-    case CLI;
-    case ANY;
+    case GET = 'GET';
+    case POST = 'POST';
+    case PUT = 'PUT';
+    case PATCH = 'PATCH';
+    case DELETE = 'DELETE';
+    case OPTIONS = 'OPTIONS';
+    case HEAD = 'HEAD';
+    case CONNECT = 'CONNECT';
+    case TRACE  = 'TRACE';
+    case CLI = 'CLI';
+    case ANY = 'ANY';
 }
