@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class CreatedException extends HttpException
 {
@@ -16,7 +17,7 @@ class CreatedException extends HttpException
      */
     public function __construct(string $message, $status = 'CONTENT_CREATED')
     {
-        parent::__construct($message, 201);
+        parent::__construct($message, HttpCode::CREATED->code());
 
         $this->status = $status;
     }

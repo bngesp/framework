@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class NotFoundException extends HttpException
 {
@@ -16,7 +17,7 @@ class NotFoundException extends HttpException
      */
     public function __construct(string $message, $status = 'NOT_FOUND')
     {
-        parent::__construct($message, 404);
+        parent::__construct($message, HttpCode::NOT_FOUND->code());
 
         $this->status = $status;
     }

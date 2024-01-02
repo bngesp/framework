@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class ForbiddenException extends HttpException
 {
@@ -16,7 +17,7 @@ class ForbiddenException extends HttpException
      */
     public function __construct(string $message, $status = 'FORBIDDEN')
     {
-        parent::__construct($message, 403);
+        parent::__construct($message, HttpCode::FORBIDDEN->code());
 
         $this->status = $status;
     }

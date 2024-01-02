@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class MethodNotAllowedException extends HttpException
 {
@@ -16,7 +17,7 @@ class MethodNotAllowedException extends HttpException
      */
     public function __construct(string $message, $status = 'METHOD_NOT_ALLOWED')
     {
-        parent::__construct($message, 405);
+        parent::__construct($message, HttpCode::METHOD_NOT_ALLOWED->code());
 
         $this->status = $status;
     }

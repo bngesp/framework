@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class NoContentException extends HttpException
 {
@@ -16,7 +17,7 @@ class NoContentException extends HttpException
      */
     public function __construct(string $message, $status = 'NO_CONTENT')
     {
-        parent::__construct($message, 204);
+        parent::__construct($message, HttpCode::NO_CONTENT->code());
 
         $this->status = $status;
     }

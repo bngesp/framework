@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class BadRequestException extends HttpException
 {
@@ -16,7 +17,7 @@ class BadRequestException extends HttpException
      */
     public function __construct(string $message, $status = 'BAD_REQUEST')
     {
-        parent::__construct($message, 400);
+        parent::__construct($message, HttpCode::BAD_REQUEST->code());
 
         $this->status = $status;
     }
