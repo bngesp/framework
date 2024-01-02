@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bow\Http\Exception;
 
 use Bow\Http\Exception\HttpException;
+use Bow\Http\HttpCode;
 
 class UnauthorizedException extends HttpException
 {
@@ -16,7 +17,7 @@ class UnauthorizedException extends HttpException
      */
     public function __construct(string $message, $status = 'UNAUTHORIZED')
     {
-        parent::__construct($message, 401);
+        parent::__construct($message, HttpCode::UNAUTHORIZED->code());
 
         $this->status = $status;
     }
